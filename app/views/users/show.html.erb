@@ -1,0 +1,35 @@
+
+<% provide(:title, @user.username) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+  		<% if @user.avatar.present? && @user.avatar != "" %>
+  		  <%= image_tag(@user.avatar, :size => "250x250") %>
+  		<% end %>
+      </h1>
+    </section>
+	<section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <br>
+  <br>
+  
+  <div class="span8">
+    <%= render 'follow_form' if signed_in? %>
+    <% if @user.microposts.any? %>
+      <h3>Posts (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+      <%= will_paginate @microposts %>
+    <% end %>
+  	<% if @user.gameposts.any? %>
+      <h3>Games (<%= @user.gameposts.count %>)</h3>
+      <ol class="gameposts">
+        <%= render @gameposts %>
+      </ol>
+      <%= will_paginate @gameposts %>
+    <% end %>
+</div>

@@ -1,0 +1,10 @@
+<li>
+  <span class="content"><%= pizzapost.content %></span>
+  <span class="timestamp">Posted <%= time_ago_in_words(pizzapost.created_at) %> ago.
+  </span>
+  <% if current_user?(pizzapost.user) %>
+    <%= link_to "delete", pizzapost, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: pizzapost.content %>
+  <% end %>
+</li>
